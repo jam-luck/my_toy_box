@@ -5,7 +5,8 @@ import Typography from '@mui/material/Typography';
 const PageTop = () => {
     const [connect, setConnect] = useState("연결안됨");
     const [Spring3, setSpring3] = useState("");
-    const [userName, setUserName] = useState("사용자 정보 없음"); 
+    const [userName, setUserName] = useState("사용자 정보 없음");
+    const [userList, setUserList] = useState([]);  
     useEffect(()=> {
         fetch('/ping')
             .then(response => response.text())
@@ -20,6 +21,13 @@ const PageTop = () => {
                 setSpring3(msg);
             });
     },[])
+    useEffect(()=> {
+        fetch('/user')
+            .then(response => response.text())
+            .then(msg => {
+                setUserList(msg);
+            });
+    },[])
     return (
         <Card sx={{ minWidth: 275 }}>
             <CardContent>
@@ -32,6 +40,8 @@ const PageTop = () => {
                     유저정보: {userName}
                     <br />
                     Spring3 Rest: {Spring3}
+                    <br/>
+                    userList: {userList}
                 </Typography>
             </CardContent>
         </Card>
