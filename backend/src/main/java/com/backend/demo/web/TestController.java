@@ -7,6 +7,6 @@ public class TestController {
 	
 	@GetMapping("/ping")
 	public String getPing() {
-		return "connected!";
+		return "connected";
 	}
 }
