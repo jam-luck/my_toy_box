@@ -1,6 +1,9 @@
 import * as React from 'react';
 import Blog from './components/blog/Blog';
-import ErrorPage from './ErrorPage'
+import ErrorPage from './ErrorPage';
+import SignIn from './components/blog/SignIn';
+import NotFoundPage from './NotFoundPage';
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 function App() {
   const [serverConnect,setServerConnect] = React.useState(false);
   React.useEffect(()=>{
@@ -17,9 +20,13 @@ function App() {
     })
   })
   return (
-    <div>
-      {serverConnect ? <Blog/> : <ErrorPage/>}
-    </div>
+  <BrowserRouter>
+    <Routes>
+      <Route exact path="/" element={serverConnect ? <Blog/> : <ErrorPage/>}/>
+      <Route exact path="/signin" element={<SignIn/>}/>
+      <Route path="*" element={<NotFoundPage/>}/>
+    </Routes>
+  </BrowserRouter>
   );
 }
 

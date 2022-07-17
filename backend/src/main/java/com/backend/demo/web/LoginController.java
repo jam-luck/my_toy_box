@@ -1,0 +1,16 @@
+package com.backend.demo.web;
+
+import java.util.Map;
+
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class LoginController {
+    @PostMapping("/login")
+	public Map<String,Object> userlogin(@RequestBody Map<String,Object> Data) {
+        System.out.println(Data);
+		return Data;
+	}
+}
