@@ -4,6 +4,7 @@ import ErrorPage from './ErrorPage';
 import SignIn from './components/blog/SignIn';
 import NotFoundPage from './NotFoundPage';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import SignUp from './components/blog/SignUp';
 function App() {
   const [serverConnect,setServerConnect] = React.useState(false);
   React.useEffect(()=>{
@@ -24,6 +25,7 @@ function App() {
     <Routes>
       <Route exact path="/" element={serverConnect ? <Blog/> : <ErrorPage/>}/>
       <Route exact path="/signin" element={<SignIn/>}/>
+      <Route exact path="/signup" element={<SignUp/>}/>
       <Route path="*" element={<NotFoundPage/>}/>
     </Routes>
   </BrowserRouter>

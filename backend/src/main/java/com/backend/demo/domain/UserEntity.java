@@ -22,20 +22,17 @@ public class UserEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idx;
-	@Column(nullable = false, length = 30)
-	private String name;
 	@Column(nullable = false, length = 50)
-	private String userId;
+	private String email;
 	@Column(nullable = false, length = 50)
-	private String userPwd;
+	private String password;
 	@Column(nullable = false, length = 10)
 	private String type;
 	
 	@Builder
-	public UserEntity(String name,String userId,String userPwd,String type) {
-		this.name = name;
-		this.userId = userId;
-		this.userPwd = userPwd;
+	public UserEntity(String email,String password,String type) {
+		this.email = email;
+		this.password = password;
 		this.type = type;
 	}
 }
