@@ -12,7 +12,6 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-
 function Copyright(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
@@ -29,10 +28,11 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function SignIn() {
+  const [test,setTest] = React.useState({});
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    fetch('/login',{
+    const response = fetch('/login',{
       method : "POST",
       headers:{
         "Content-Type": "application/json",
@@ -41,11 +41,13 @@ export default function SignIn() {
         email: data.get('email'),
         password: data.get('password'),
       })
-    }).then(response => response.text());
+    }).then(response => response.json())
+    .then(data => setTest(data));
   };
 
   return (
     <ThemeProvider theme={theme}>
+      <div>{JSON.stringify(test)}</div>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
@@ -62,6 +64,7 @@ export default function SignIn() {
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
+
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
             <TextField
               margin="normal"

@@ -23,6 +23,6 @@ public class LoginService {
             userRepository.save(newUser);
             return newUser;
         }
-        return user;
+        return null;
     }
 }
