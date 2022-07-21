@@ -17,7 +17,7 @@ public class LoginService {
         return userRepository.findByEmail(input.get("email").toString());
     }
     public UserEntity insertUser(Map<String,Object> input){
-        UserEntity user = getUser(input);
+        UserEntity user = getUser(input); // 유저중복확인
         if(user == null){
             UserEntity newUser = new UserEntity(input.get("email").toString(),input.get("password").toString(),"1");
             userRepository.save(newUser);

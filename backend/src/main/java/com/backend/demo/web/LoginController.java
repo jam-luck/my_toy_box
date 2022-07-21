@@ -26,15 +26,15 @@ public class LoginController {
 	public ResponseEntity<MessageDto> userLogin(@RequestBody Map<String,Object> Data) {
         UserEntity user = loginService.getUser(Data);
 		MessageDto message = new MessageDto();
-		HttpHeaders header = new HttpHeaders();
-		header.setContentType(new MediaType("application", "json"));
 		Map <String,Object> result = new HashMap<>();
-
-		if(user == null){
+		result.put("email", "");
+		result.put("password","");
+		if(user == null){ // 아이디에 해당하는 유저 없음
 			message.setStatus(StatusEnum.NOT_FOUND);
-			message.setMessage("아이디, 비밀번호를 확인하세요");
-			result.put("email", "");
-			result.put("password","");
+			message.setMessage("해당 아이디의 유저가 없습니다.");
+		} else if(!user.getPassword().equals(Data.get("password"))){
+			message.setStatus(StatusEnum.NOT_FOUND);
+			message.setMessage("비밀번호를 확인하세요.");
 		} else {
 			message.setStatus(StatusEnum.OK);
 			message.setMessage("유저 찾기 성공");
@@ -46,11 +46,9 @@ public class LoginController {
 	}
 
 	@PostMapping("/signup")
-	public ResponseEntity<MessageDto>  userSignUp(@RequestBody Map<String,Object> Data) {
+	public ResponseEntity<MessageDto> userSignUp(@RequestBody Map<String,Object> Data) {
 		UserEntity user = loginService.insertUser(Data);
 		MessageDto message = new MessageDto();
-		HttpHeaders header = new HttpHeaders();
-		header.setContentType(new MediaType("application", "json"));
 		Map <String,Object> result = new HashMap<>();
 		if(user == null){
 			message.setStatus(StatusEnum.NOT_FOUND);
@@ -60,6 +58,6 @@ public class LoginController {
 			message.setMessage("회원가입성공");
 		}
 		message.setData(result);
-		return new ResponseEntity<MessageDto>(message,header,HttpStatus.OK);
+		return new ResponseEntity<MessageDto>(message,HttpStatus.OK);
 	}
 }
