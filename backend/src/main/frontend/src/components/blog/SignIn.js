@@ -12,6 +12,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import NaverLogin from '../auth/NaverLogin'
 function Copyright(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
@@ -28,6 +29,9 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function SignIn() {
+  const onSuccessHandler = res => {
+    console.log(res)
+  }
   const [test,setTest] = React.useState({});
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -94,10 +98,16 @@ export default function SignIn() {
               type="submit"
               fullWidth
               variant="contained"
-              sx={{ mt: 3, mb: 2 }}
+              sx={{ mt: 1, mb: 1 }}
             >
               Sign In
             </Button>
+            <div className="App">
+              <NaverLogin
+                success={onSuccessHandler}
+                fail={res => console.log(res)}
+              />
+            </div>
             <Grid container>
               <Grid item xs>
                 <Link href="#" variant="body2">
