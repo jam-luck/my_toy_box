@@ -102,12 +102,10 @@ export default function SignIn() {
             >
               Sign In
             </Button>
-            <div className="App">
-              <NaverLogin
+            <NaverLogin
                 success={onSuccessHandler}
                 fail={res => console.log(res)}
-              />
-            </div>
+            />
             <Grid container>
               <Grid item xs>
                 <Link href="#" variant="body2">

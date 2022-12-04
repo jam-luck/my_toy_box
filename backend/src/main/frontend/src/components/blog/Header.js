@@ -6,16 +6,24 @@ import IconButton from '@mui/material/IconButton';
 import SearchIcon from '@mui/icons-material/Search';
 import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
-
+import Grid from '@mui/material/Grid';
+import { useState } from 'react';
 function Header(props) {
   const { sections, title } = props;
+  const userId = useState("");
   const handleSignIn= ()=>{
     props.history.push("/signin");
   }
+  React.useEffect(()=>{
+  },[]);
   return (
     <React.Fragment>
       <Toolbar sx={{ borderBottom: 1, borderColor: 'divider' }}>
-        <Button size="small">Subscribe</Button>
+        <Grid item xs={2} md={2}>
+          <Typography>
+            {userId}
+          </Typography> 
+        </Grid>
         <Typography
           component="h2"
           variant="h5"
